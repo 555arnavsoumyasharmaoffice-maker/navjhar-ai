@@ -5,7 +5,7 @@ def transcribe_multilingual(audio_file_path: str, language: str = "hindi") -> st
         return "Error: File not found."
     try:
         from google import genai
-        api_key = os.environ.get("GEMINI_API_KEY", "AQ.Ab8RN6KG-fwYzup2QrE" + "Xx0HulRQTqGtSbpLesYQZAzT6dnNcCg")
+        api_key = "AQ.Ab8RN6KG-fwYzup2QrE" + "Xx0HulRQTqGtSbpLesYQZAzT6dnNcCg"
         if not api_key:
             return "Error: GEMINI_API_KEY is not set."
         

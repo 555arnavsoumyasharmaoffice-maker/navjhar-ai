@@ -1,16 +1,17 @@
-import os
-import json
-from google import genai
-from google.genai import types
+﻿import os
+import re
 
+with open("ai_functions/gemini_helper.py", "r") as f:
+    code = f.read()
 
+new_logic = '''
 import time
 from google.genai.errors import APIError
 
 def generate_with_gemini(prompt: str, expect_json: bool = False) -> str:
     key1 = "AQ.Ab8RN6KG-fwYzup2QrE"
     key2 = "Xx0HulRQTqGtSbpLesYQZAzT6dnNcCg"
-    api_key = key1 + key2
+    api_key = os.environ.get("GEMINI_API_KEY", key1 + key2)
     client = genai.Client(api_key=api_key)
     
     kwargs = {"model": "gemini-3.8-flash", "contents": prompt}
@@ -32,3 +33,9 @@ def generate_with_gemini(prompt: str, expect_json: bool = False) -> str:
                 time.sleep(2)
                 continue
             raise
+'''
+
+code = re.sub(r'def generate_with_gemini\(.*', new_logic, code, flags=re.DOTALL)
+
+with open("ai_functions/gemini_helper.py", "w") as f:
+    f.write(code)
