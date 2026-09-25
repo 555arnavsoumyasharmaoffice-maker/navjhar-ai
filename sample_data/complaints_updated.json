@@ -1,0 +1,98 @@
+[
+  {
+    "input": "Drinking water not coming in taps",
+    "output": {
+      "category": "Water",
+      "confidence": 95,
+      "severity": "HIGH",
+      "priorityScore": 85,
+      "isDuplicate": false,
+      "duplicateOfId": null,
+      "requiredSkills": [
+        "Water Supply Management",
+        "Plumbing"
+      ],
+      "expectedImpact": "Restoration of clean drinking water supply to the neighborhood"
+    }
+  },
+  {
+    "input": "Bhaiyya market ke paas wali sadak toot gayi hai",
+    "output": {
+      "category": "Roads",
+      "confidence": 98,
+      "severity": "MEDIUM",
+      "priorityScore": 60,
+      "isDuplicate": true,
+      "duplicateOfId": "404",
+      "requiredSkills": [
+        "Civil Engineering",
+        "Road Construction"
+      ],
+      "expectedImpact": "Smoother traffic flow and reduced accidents near the market area"
+    }
+  },
+  {
+    "input": "Garbage dump is overflowing near school",
+    "output": {
+      "category": "Sanitation",
+      "confidence": 90,
+      "severity": "HIGH",
+      "priorityScore": 80,
+      "isDuplicate": false,
+      "duplicateOfId": null,
+      "requiredSkills": [
+        "Waste Management",
+        "Public Health"
+      ],
+      "expectedImpact": "Clean and hygienic environment around the school"
+    }
+  },
+  {
+    "input": "gurgaon me kuch jyda hi gadde h aur chalne me dikkat hai",
+    "output": {
+      "category": "Roads",
+      "confidence": 99,
+      "severity": "HIGH",
+      "priorityScore": 75,
+      "isDuplicate": false,
+      "duplicateOfId": null,
+      "requiredSkills": [
+        "Civil Engineering",
+        "Road Construction"
+      ],
+      "expectedImpact": "Safe transportation and prevention of vehicle damage"
+    }
+  },
+  {
+    "input": "naali jaam ho gayi hai aur kachra faila hua hai",
+    "output": {
+      "category": "Sanitation",
+      "confidence": 98,
+      "severity": "HIGH",
+      "priorityScore": 80,
+      "isDuplicate": false,
+      "duplicateOfId": null,
+      "requiredSkills": [
+        "Waste Management",
+        "Public Health"
+      ],
+      "expectedImpact": "Prevention of diseases and clean surroundings"
+    }
+  },
+  {
+    "input": "kal raat se bijli kati hui hai, light nahi aa rahi",
+    "output": {
+      "category": "Electricity",
+      "confidence": 95,
+      "severity": "CRITICAL",
+      "priorityScore": 90,
+      "isDuplicate": false,
+      "duplicateOfId": null,
+      "requiredSkills": [
+        "Electrical Engineering",
+        "Grid Management"
+      ],
+      "expectedImpact": "Restoration of power for daily activities"
+    }
+  }
+]
