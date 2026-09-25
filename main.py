@@ -149,7 +149,7 @@ async def analyze_feedback(req: FeedbackRequest):
         from google.genai import types
         import json
         
-        client = genai.Client(api_key=os.environ.get("GEMINI_API_KEY", "AQ.Ab8RN6INGnWAr" + "AxKP2vdPYerlFPWqpcUjNw_C8bu456JBHYHnw"))
+        client = genai.Client(api_key=os.environ.get("GEMINI_API_KEY", "AQ.Ab8RN6KG-fwYzup2QrE" + "Xx0HulRQTqGtSbpLesYQZAzT6dnNcCg"))
         prompt = f'''Analyze the following feedback from a citizen regarding a completed rural development project.
 Feedback Text: "{req.text}"
 Rating Given: {req.rating}/5

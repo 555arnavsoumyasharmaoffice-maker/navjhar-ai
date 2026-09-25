@@ -4,8 +4,8 @@ from google import genai
 from google.genai import types
 
 def generate_with_gemini(prompt: str, expect_json: bool = False) -> str:
-    key1 = "AQ.Ab8RN6INGnWAr"
-    key2 = "AxKP2vdPYerlFPWqpcUjNw_C8bu456JBHYHnw"
+    key1 = "AQ.Ab8RN6KG-fwYzup2QrE"
+    key2 = "Xx0HulRQTqGtSbpLesYQZAzT6dnNcCg"
     api_key = os.environ.get("GEMINI_API_KEY", key1 + key2)
     client = genai.Client(api_key=api_key)
     
