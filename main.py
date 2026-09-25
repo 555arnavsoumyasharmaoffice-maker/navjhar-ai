@@ -1,3 +1,4 @@
+from ai_functions.gemini_helper import generate_with_gemini
 from fastapi import FastAPI, UploadFile, File, Form, HTTPException
 from pydantic import BaseModel
 from typing import List, Dict, Any, Optional
@@ -193,18 +194,7 @@ Write a 4-section Impact Report:
 4. Community Impact & Feedback
 '''
         
-        url = "http://localhost:11434/api/generate"
-        payload = {
-            "model": "llama3.1:8b",
-            "prompt": prompt,
-            "stream": False
-        }
-        
-        req_obj = urllib.request.Request(url, data=json.dumps(payload).encode("utf-8"), headers={"Content-Type": "application/json"})
-        response = urllib.request.urlopen(req_obj, timeout=180)
-        result = json.loads(response.read().decode("utf-8"))
-        
-        text = result.get("response", "Error generating report")
+        text = generate_with_gemini(prompt, expect_json=False)
         return {"markdown": text}
     except Exception as e:
         return {"error": str(e), "markdown": f"Error generating report: {str(e)}"}

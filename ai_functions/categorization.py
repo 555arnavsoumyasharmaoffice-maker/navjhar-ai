@@ -1,3 +1,4 @@
+from ai_functions.gemini_helper import generate_with_gemini
 import json
 import urllib.request
 import urllib.error
@@ -132,21 +133,8 @@ def categorize_complaint(text: str, coordinates: str = None, existing_problems: 
     examples = get_few_shot_examples()
     prompt = format_prompt(text, candidates, examples, manual_category)
     
-    url = "http://localhost:11434/api/generate"
-    payload = {
-        "model": "llama3.1:8b",
-        "prompt": prompt,
-        "format": "json",
-        "stream": False
-    }
-    
-    req = urllib.request.Request(url, data=json.dumps(payload).encode("utf-8"), headers={"Content-Type": "application/json"})
-    
     try:
-        response = urllib.request.urlopen(req, timeout=180)
-        result = json.loads(response.read().decode("utf-8"))
-        
-        response_text = result.get("response", "{}")
+        response_text = generate_with_gemini(prompt, expect_json=True)
         parsed_json = json.loads(response_text)
         
         # Override duplicate flag if no candidates (failsafe against LLM hallucination)

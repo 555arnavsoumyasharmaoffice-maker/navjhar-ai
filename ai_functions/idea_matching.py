@@ -1,3 +1,4 @@
+from ai_functions.gemini_helper import generate_with_gemini
 import json
 import urllib.request
 import urllib.error
@@ -49,21 +50,8 @@ def find_similar_ideas_llm(list_of_ideas: list) -> dict:
         
     prompt = format_prompt(list_of_ideas)
     
-    url = "http://localhost:11434/api/generate"
-    payload = {
-        "model": "llama3.1:8b",
-        "prompt": prompt,
-        "format": "json",
-        "stream": False
-    }
-    
-    req = urllib.request.Request(url, data=json.dumps(payload).encode("utf-8"), headers={"Content-Type": "application/json"})
-    
     try:
-        response = urllib.request.urlopen(req, timeout=180)
-        result = json.loads(response.read().decode("utf-8"))
-        
-        response_text = result.get("response", "{}")
+        response_text = generate_with_gemini(prompt, expect_json=True)
         parsed_json = json.loads(response_text)
         
         # POST-PROCESSING: Filter out groups that are > 500m apart geographically

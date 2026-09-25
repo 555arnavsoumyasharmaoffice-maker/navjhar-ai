@@ -1,3 +1,4 @@
+from ai_functions.gemini_helper import generate_with_gemini
 """Rank only supplied, real solver identities using the existing Ollama protocol."""
 import json
 import os
@@ -31,11 +32,9 @@ def match_problem_to_solvers(problem_data, list_of_solvers):
         'Return JSON {"matches":[{"solver_id":"supplied ID","match_score":integer 0-100,"reason":"evidence-based explanation"}]}. '
         "Return an empty list if none are suitable.\n" + json.dumps({"problem": problem_data, "solvers": list_of_solvers})
     )
-    payload = {"model": os.getenv("OLLAMA_MODEL", "llama3.1:8b"), "prompt": prompt, "format": "json", "stream": False}
-    request = urllib.request.Request(os.getenv("OLLAMA_URL", "http://localhost:11434").rstrip("/") + "/api/generate", data=json.dumps(payload).encode(), headers={"Content-Type": "application/json"})
     try:
-        with urllib.request.urlopen(request, timeout=180) as response:
-            result = json.loads(json.loads(response.read())["response"])
+        response_text = generate_with_gemini(prompt, expect_json=True)
+        result = json.loads(response_text)
         return {"matches": validate_matches(result, list_of_solvers)}
     except Exception:
         return {"matches": [], "error": "AI solver matching unavailable or returned invalid data"}

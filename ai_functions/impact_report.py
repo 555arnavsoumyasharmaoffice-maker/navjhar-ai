@@ -1,3 +1,4 @@
+from ai_functions.gemini_helper import generate_with_gemini
 import json
 import urllib.request
 import urllib.error
@@ -25,20 +26,8 @@ def format_prompt(challenge_data, solution_data, feedback_list):
 def generate_impact_report(challenge_data: dict, solution_data: dict, feedback_list: list) -> str:
     prompt = format_prompt(challenge_data, solution_data, feedback_list)
     
-    url = "http://localhost:11434/api/generate"
-    payload = {
-        "model": "llama3.1:8b",
-        "prompt": prompt,
-        "stream": False
-    }
-    
-    req = urllib.request.Request(url, data=json.dumps(payload).encode("utf-8"), headers={"Content-Type": "application/json"})
-    
     try:
-        response = urllib.request.urlopen(req, timeout=180)
-        result = json.loads(response.read().decode("utf-8"))
-        
-        response_text = result.get("response", "Error generating report")
+        response_text = generate_with_gemini(prompt, expect_json=False)
         return response_text
     except urllib.error.URLError as e:
         return f"Failed to connect to Ollama server: {str(e)}"
