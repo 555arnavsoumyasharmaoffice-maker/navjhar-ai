@@ -13,7 +13,7 @@ def generate_with_gemini(prompt: str, expect_json: bool = False) -> str:
     api_key = key1 + key2
     client = genai.Client(api_key=api_key)
     
-    kwargs = {"model": "gemini-3.8-flash", "contents": prompt}
+    kwargs = {"model": "gemini-flash-lite-latest", "contents": prompt}
     if expect_json:
         kwargs["config"] = types.GenerateContentConfig(response_mime_type="application/json")
         
