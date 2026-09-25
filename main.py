@@ -82,7 +82,7 @@ def analyze_sentiment_endpoint(request: TextRequest):
 def categorize_endpoint(request: CategorizeRequest):
     result = categorize_complaint(request.text, request.coordinates, request.existing_problems, getattr(request, 'manual_category', None))
     if not isinstance(result, dict) or result.get("error"):
-        raise HTTPException(status_code=503, detail="AI processing unavailable; retry the request")
+        raise HTTPException(status_code=503, detail=str(result.get("error")))
     return result
 
 @app.post("/find-similar-ideas")
@@ -90,28 +90,28 @@ def find_similar_ideas_endpoint(request: IdeaRequest):
     ideas_list = [{"text": idea.text, "location": idea.location} for idea in request.ideas]
     result = find_similar_ideas_llm(ideas_list)
     if not isinstance(result, dict) or result.get("error"):
-        raise HTTPException(status_code=503, detail="AI processing unavailable; retry the request")
+        raise HTTPException(status_code=503, detail=str(result.get("error")))
     return result
 
 @app.post("/categorize-profile")
 def categorize_profile_endpoint(request: TextRequest):
     result = categorize_expertise_profile(request.text)
     if not isinstance(result, dict) or result.get("error"):
-        raise HTTPException(status_code=503, detail="AI processing unavailable; retry the request")
+        raise HTTPException(status_code=503, detail=str(result.get("error")))
     return result
 
 @app.post("/structure-solution")
 def structure_solution_endpoint(request: TextRequest):
     result = structure_solution(request.text)
     if not isinstance(result, dict) or result.get("error"):
-        raise HTTPException(status_code=503, detail="AI processing unavailable; retry the request")
+        raise HTTPException(status_code=503, detail=str(result.get("error")))
     return result
 
 @app.post("/synthesize-solution")
 def synthesize_solution_endpoint(request: SynthesizeRequest):
     result = synthesize_best_solution(request.problem_context, request.list_of_solutions)
     if not isinstance(result, dict) or result.get("error"):
-        raise HTTPException(status_code=503, detail="AI processing unavailable; retry the request")
+        raise HTTPException(status_code=503, detail=str(result.get("error")))
     return result
 
 class MatchSolversRequest(BaseModel):
