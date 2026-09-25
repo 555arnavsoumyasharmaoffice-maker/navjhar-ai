@@ -18,7 +18,7 @@ def transcribe_multilingual(audio_file_path: str, language: str = "hindi") -> st
         
         print("Requesting transcription from Gemini...")
         response = client.models.generate_content(
-            model='gemini-2.5-flash',
+            model='gemini-3.8-flash',
             contents=[uploaded_file, prompt]
         )
         
