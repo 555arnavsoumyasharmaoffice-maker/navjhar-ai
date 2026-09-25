@@ -47,7 +47,6 @@ class SynthesizeRequest(BaseModel):
 @app.post("/transcribe")
 async def transcribe_audio(file: UploadFile = File(...), language: str = Form("hindi")):
     import shutil
-    import os
     from fastapi import HTTPException
     
     file_location = f"temp_{file.filename}"
@@ -147,7 +146,6 @@ async def analyze_feedback(req: FeedbackRequest):
     try:
         from google import genai
         from google.genai import types
-        import os
         import json
         
         client = genai.Client(api_key=os.environ.get("GEMINI_API_KEY", "AQ.Ab8RN6INGnWAr" + "AxKP2vdPYerlFPWqpcUjNw_C8bu456JBHYHnw"))
